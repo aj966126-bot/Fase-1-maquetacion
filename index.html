@@ -1,47 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PymeGest - Gestiona tu PYME de forma más inteligente</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Formulario de contacto</h1>
 
-        <nav>
-            <a href="index.html">Inicio</a>
-            <a href="#">Servicios</a>
-            <a href="#">Contacto</a>
-        </nav>
-    </header>
-    <main>
-    <section>
-        <h2>Contáctanos</h2>
-        <p>Completa el siguiente formulario y nos pondremos en contacto contigo.</p>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🖥️</span>
+      <span class="logo-text">Pyme<span class="logo-accent">Gest</span></span>
+    </div>
 
-        <form>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre" name="nombre">
+    <nav class="nav-links">
+      <a href="index.html" class="active">Inicio</a>
+      <a href="nosotros.html">Nosotros</a>
+      <a href="caracteristicas.html">Características</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
 
-    <label for="apellido">Apellido:</label>
-    <input type="text" id="apellido" name="apellido">
+    <a href="formulario.html" class="btn btn-primary">Comenzar</a>
+  </header>
 
-    <label for="correo">Correo electrónico:</label>
-    <input type="email" id="correo" name="correo">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <span class="badge">PLATAFORMA DIGITAL PARA PYMES</span>
 
-    <label for="telefono">Teléfono:</label>
-    <input type="tel" id="telefono" name="telefono">
+      <h1>
+        Gestiona tu PYME <br>
+        de forma más <br>
+        <span class="highlight">inteligente</span>
+      </h1>
 
-    <label for="mensaje">Mensaje:</label>
-    <textarea id="mensaje" name="mensaje"></textarea>
+      <p class="hero-description">
+        PymeGest es una solución digital diseñada para facilitar la
+        organización y gestión de pequeñas y medianas empresas.
+      </p>
 
-    <button type="submit">Enviar</button>
-        </form>
-    </section>
-</main>
-<footer>
-    <p>&copy; 2026 Formulario de contacto. Todos los derechos reservados.</p>
-</footer>
+      <div class="hero-buttons">
+        <a href="nosotros.html" class="btn btn-light">Conoce PymeGest</a>
+        <a href="formulario.html" class="btn btn-outline">Comenzar</a>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <img src="assets/hero-office.jpg" alt="Equipo trabajando con PymeGest">
+      <div class="stat-card">
+        <span class="stat-icon">📈</span>
+        <div>
+          <strong>+47%</strong>
+          <p>Productividad media</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <button class="help-button" aria-label="Ayuda">?</button>
+
 </body>
 </html>
