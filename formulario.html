@@ -2,464 +2,166 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Formulario de contacto de PymeGest.">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Formulario de contacto de PymeGest.">
     <title>Formulario | PymeGest</title>
-
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 
-
 <body>
-
-
     <!-- ENCABEZADO -->
-
     <header class="encabezado">
-
         <div class="contenedor header-contenido">
-
             <div class="logo">
-
                 <a href="Inicio.html">
-
-                    <img src="img/logo-pymegest.jpeg"
-                         alt="Logo de PymeGest">
-
+                    <img src="img/logo-pymegest.jpeg" alt="Logo de PymeGest">
                 </a>
-
             </div>
-
-
-            <nav class="menu-navegacion"
-                 aria-label="Menú principal">
-
+            <nav class="menu-navegacion" aria-label="Menú principal">
                 <ul>
-
-                    <li>
-
-                        <a href="Inicio.html">
-                            Inicio
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="Informacion.html">
-                            Información
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a href="Formulario.html"
-                           class="activo">
-
-                            Formulario
-
-                        </a>
-
-                    </li>
-
+                    <li><a href="Inicio.html">Inicio</a></li>
+                    <li><a href="Informacion.html">Información</a></li>
+                    <li><a href="Formulario.html" class="activo">Formulario</a></li>
                 </ul>
-
             </nav>
-
         </div>
-
     </header>
 
-
-
     <main>
-
-
-        <!-- ENCABEZADO -->
-
+        <!-- HERO -->
         <section class="pagina-hero">
-
             <div class="contenedor contenido-centrado">
-
-                <span class="etiqueta">
-                    Contacto
-                </span>
-
-                <h1>
-                    Conoce más sobre PymeGest
-                </h1>
-
-                <p>
-                    Completa el siguiente formulario para compartir
-                    información sobre tu empresa.
-                </p>
-
+                <span class="etiqueta">Contacto</span>
+                <h1>Conoce más sobre PymeGest</h1>
+                <p>Completa el siguiente formulario para compartir información sobre tu empresa.</p>
             </div>
-
         </section>
-
-
 
         <!-- FORMULARIO -->
-
         <section class="seccion">
-
             <div class="contenedor formulario-contenedor">
-
-
                 <div class="formulario-introduccion">
-
-                    <span class="etiqueta">
-                        Información empresarial
-                    </span>
-
-                    <h2>
-                        Cuéntanos sobre tu empresa
-                    </h2>
-
-                    <p>
-                        Completa los campos para conocer mejor
-                        las necesidades de tu negocio.
-                    </p>
-
+                    <span class="etiqueta">Información empresarial</span>
+                    <h2>Cuéntanos sobre tu empresa</h2>
+                    <p>Completa los campos para conocer mejor las necesidades de tu negocio.</p>
                     <div class="formulario-nota">
-
-                        <strong>
-                            Importante:
-                        </strong>
-
-                        Este formulario corresponde únicamente
-                        a la maquetación académica del proyecto.
-
+                        <strong>Importante:</strong> Este formulario corresponde únicamente a la maquetación académica del proyecto.
                     </div>
-
                 </div>
 
-
-
-                <form class="formulario"
-                      action="#"
-                      method="post">
-
+                <!-- Validación con JavaScript -->
+                <form class="formulario" action="#" method="post" onsubmit="return validarFormulario()">
 
                     <!-- NOMBRE -->
-
                     <div class="campo">
-
-                        <label for="nombre">
-                            Nombre completo
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nombre"
-                            name="nombre"
-                            placeholder="Ej. Juan Pérez"
-                            required
-                        >
-
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required>
                     </div>
-
-
 
                     <!-- CORREO -->
-
                     <div class="campo">
-
-                        <label for="correo">
-                            Correo electrónico
-                        </label>
-
-                        <input
-                            type="email"
-                            id="correo"
-                            name="correo"
-                            placeholder="ejemplo@correo.com"
-                            required
-                        >
-
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required>
                     </div>
-
-
 
                     <!-- TELÉFONO -->
-
                     <div class="campo">
-
-                        <label for="telefono">
-                            Teléfono
-                        </label>
-
-                        <input
-                            type="tel"
-                            id="telefono"
-                            name="telefono"
-                            placeholder="(809) 000-0000"
-                            required
-                        >
-
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="(809) 000-0000" required>
                     </div>
-
-
 
                     <!-- EMPRESA -->
-
                     <div class="campo">
-
-                        <label for="empresa">
-                            Nombre de la empresa
-                        </label>
-
-                        <input
-                            type="text"
-                            id="empresa"
-                            name="empresa"
-                            placeholder="Nombre de tu empresa"
-                            required
-                        >
-
+                        <label for="empresa">Nombre de la empresa</label>
+                        <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" required>
                     </div>
-
-
 
                     <!-- SECTOR -->
-
                     <div class="campo">
-
-                        <label for="sector">
-                            Sector de la empresa
-                        </label>
-
-                        <select id="sector"
-                                name="sector"
-                                required>
-
-                            <option value="">
-                                Selecciona una opción
-                            </option>
-
-                            <option value="comercio">
-                                Comercio
-                            </option>
-
-                            <option value="servicios">
-                                Servicios
-                            </option>
-
-                            <option value="tecnologia">
-                                Tecnología
-                            </option>
-
-                            <option value="manufactura">
-                                Manufactura
-                            </option>
-
-                            <option value="agricultura">
-                                Agricultura
-                            </option>
-
-                            <option value="otro">
-                                Otro
-                            </option>
-
+                        <label for="sector">Sector de la empresa</label>
+                        <select id="sector" name="sector" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="comercio">Comercio</option>
+                            <option value="servicios">Servicios</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="manufactura">Manufactura</option>
+                            <option value="agricultura">Agricultura</option>
+                            <option value="otro">Otro</option>
                         </select>
-
                     </div>
-
-
 
                     <!-- TAMAÑO -->
-
                     <div class="campo">
-
-                        <label for="tamano">
-                            Tamaño de la empresa
-                        </label>
-
-                        <select id="tamano"
-                                name="tamano"
-                                required>
-
-                            <option value="">
-                                Selecciona una opción
-                            </option>
-
-                            <option value="micro">
-                                Microempresa
-                            </option>
-
-                            <option value="pequena">
-                                Pequeña empresa
-                            </option>
-
-                            <option value="mediana">
-                                Mediana empresa
-                            </option>
-
+                        <label for="tamano">Tamaño de la empresa</label>
+                        <select id="tamano" name="tamano" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="micro">Microempresa</option>
+                            <option value="pequena">Pequeña empresa</option>
+                            <option value="mediana">Mediana empresa</option>
                         </select>
-
                     </div>
-
-
 
                     <!-- MENSAJE -->
-
                     <div class="campo campo-completo">
-
-                        <label for="mensaje">
-                            Mensaje o comentario
-                        </label>
-
-                        <textarea
-                            id="mensaje"
-                            name="mensaje"
-                            rows="6"
-                            placeholder="Cuéntanos brevemente sobre tu empresa..."
-                        ></textarea>
-
+                        <label for="mensaje">Mensaje o comentario</label>
+                        <textarea id="mensaje" name="mensaje" rows="6" placeholder="Cuéntanos brevemente sobre tu empresa..."></textarea>
                     </div>
 
-
+                    <!-- MENSAJE DE ERROR -->
+                    <div id="mensajeError" class="mensaje-error"></div>
 
                     <!-- BOTONES -->
-
                     <div class="campo-completo formulario-acciones">
-
-                        <button
-                            type="submit"
-                            class="boton boton-primario">
-
-                            Enviar formulario
-
-                        </button>
-
-
-                        <button
-                            type="reset"
-                            class="boton boton-secundario">
-
-                            Limpiar
-
-                        </button>
-
+                        <button type="submit" class="boton boton-primario">Enviar formulario</button>
+                        <button type="reset" class="boton boton-secundario">Limpiar</button>
                     </div>
-
-
                 </form>
-
             </div>
-
         </section>
 
+        <!-- BUSCADOR DE SECTORES -->
+        <section class="seccion">
+            <div class="contenedor">
+                <h2>Buscador de sectores</h2>
+                <input type="text" id="buscadorSector" placeholder="Escribe un sector..." onkeyup="buscarSector()">
+                <ul id="resultadosSector"></ul>
+            </div>
+        </section>
     </main>
 
-
-
     <!-- FOOTER -->
-
     <footer class="pie-pagina">
-
         <div class="contenedor footer-grid">
-
-
             <div class="footer-info">
-
-                <a href="Inicio.html"
-                   class="logo-footer">
-
-                    <img src="img/logo-pymegest.jpeg"
-                         alt="Logo de PymeGest">
-
+                <a href="Inicio.html" class="logo-footer">
+                    <img src="img/logo-pymegest.jpeg" alt="Logo de PymeGest">
                 </a>
-
-                <p>
-                    Plataforma web orientada a facilitar la gestión
-                    de pequeñas y medianas empresas.
-                </p>
-
+                <p>Plataforma web orientada a facilitar la gestión de pequeñas y medianas empresas.</p>
             </div>
-
-
-
             <div class="footer-enlaces">
-
-                <h3>
-                    Enlaces
-                </h3>
-
+                <h3>Enlaces</h3>
                 <ul>
-
-                    <li>
-                        <a href="Inicio.html">
-                            Inicio
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="Informacion.html">
-                            Información
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="Formulario.html">
-                            Formulario
-                        </a>
-                    </li>
-
+                    <li><a href="Inicio.html">Inicio</a></li>
+                    <li><a href="Informacion.html">Información</a></li>
+                    <li><a href="Formulario.html">Formulario</a></li>
                 </ul>
-
             </div>
-
-
-
             <div class="footer-contacto">
-
-                <h3>
-                    Contacto
-                </h3>
-
+                <h3>Contacto</h3>
                 <address>
-
-                    <p>
-                        contacto@pymegest.com
-                    </p>
-
-                    <p>
-                        (809) 000-0000
-                    </p>
-
-                    <p>
-                        Santiago, República Dominicana
-                    </p>
-
+                    <p>contacto@pymegest.com</p>
+                    <p>(809) 000-0000</p>
+                    <p>Santiago, República Dominicana</p>
                 </address>
-
             </div>
-
-
         </div>
-
-
         <div class="footer-copy">
-
-            <p>
-                &copy; 2026 PymeGest. Proyecto académico UAPA.
-            </p>
-
+            <p>&copy; 2026 PymeGest. Proyecto académico UAPA.</p>
         </div>
-
     </footer>
 
-
+    <!-- ENLACE AL JAVASCRIPT -->
+    <script src="script.js"></script>
 </body>
 </html>
