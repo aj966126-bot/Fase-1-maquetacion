@@ -518,6 +518,72 @@ p {
 
 
 /* =========================
+   BUSCADOR DE FUNCIONALIDADES
+========================= */
+
+.buscador-funcionalidades {
+
+    max-width: 450px;
+
+    margin: 0 auto 30px;
+
+    text-align: left;
+}
+
+.etiqueta-buscador {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-weight: 600;
+
+    color: var(--negro);
+}
+
+.buscador-funcionalidades input {
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border: 1px solid #ccd3da;
+
+    border-radius: 7px;
+
+    font-family: inherit;
+
+    font-size: 0.95rem;
+
+    background-color: var(--blanco);
+}
+
+.buscador-funcionalidades input:focus {
+
+    outline: 2px solid #9acaf0;
+
+    border-color: var(--azul-acento);
+}
+
+.sin-resultados {
+
+    text-align: center;
+
+    color: var(--gris-texto);
+
+    background-color: var(--gris-claro);
+
+    border-radius: 8px;
+
+    padding: 18px;
+
+    max-width: 550px;
+
+    margin: 0 auto 30px;
+}
+
+
+/* =========================
    PASOS
 ========================= */
 

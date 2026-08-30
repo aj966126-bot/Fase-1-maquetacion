@@ -196,85 +196,26 @@
 
                 </div>
 
+                <!-- BUSCADOR DE FUNCIONALIDADES (Componente dinámico - Fase 2) -->
+                <div class="buscador-funcionalidades">
+                    <label for="buscadorFuncionalidad" class="etiqueta-buscador">
+                        Buscar funcionalidad
+                    </label>
+                    <input
+                        type="text"
+                        id="buscadorFuncionalidad"
+                        placeholder="Ej. inventario, clientes, reportes..."
+                        autocomplete="off">
+                </div>
 
-                <div class="grid-tarjetas">
+                <!-- Mensaje cuando no hay coincidencias -->
+                <p id="sinResultados" class="sin-resultados" hidden>
+                    No se encontraron funcionalidades que coincidan con tu búsqueda.
+                </p>
 
-
-                    <article class="tarjeta">
-
-                        <div class="icono">
-                            01
-                        </div>
-
-                        <h3>
-                            Gestión de ventas e inventario
-                        </h3>
-
-                        <p>
-                            Organización de las operaciones de ventas
-                            y control de las existencias.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="tarjeta">
-
-                        <div class="icono">
-                            02
-                        </div>
-
-                        <h3>
-                            Clientes y proveedores
-                        </h3>
-
-                        <p>
-                            Centralización de información relacionada
-                            con clientes y proveedores.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="tarjeta">
-
-                        <div class="icono">
-                            03
-                        </div>
-
-                        <h3>
-                            Reportes visuales
-                        </h3>
-
-                        <p>
-                            Presentación organizada de información
-                            para facilitar el análisis empresarial.
-                        </p>
-
-                    </article>
-
-
-
-                    <article class="tarjeta">
-
-                        <div class="icono">
-                            04
-                        </div>
-
-                        <h3>
-                            Interfaz intuitiva
-                        </h3>
-
-                        <p>
-                            Diseño pensado para facilitar la interacción
-                            de los usuarios con la plataforma.
-                        </p>
-
-                    </article>
-
-
+                <!-- Contenedor donde se pintan las tarjetas dinámicamente -->
+                <div class="grid-tarjetas" id="listaFuncionalidades">
+                    <!-- Las tarjetas se generan con JavaScript (script.js) -->
                 </div>
 
             </div>
@@ -508,6 +449,8 @@
 
     </footer>
 
+    <!-- ENLACE AL JAVASCRIPT -->
+    <script src="script.js"></script>
 
 </body>
 </html>
