@@ -1,4 +1,5 @@
-// Valida los campos del formulario antes de enviar
+<script src="script.js"></script>
+
 function validarFormulario() {
     const nombre = document.getElementById("nombre").value.trim();
     const correo = document.getElementById("correo").value.trim();
@@ -27,38 +28,21 @@ function validarFormulario() {
     }
 
     if (mensajeError !== "") {
-        mostrarError(mensajeError);
+        document.getElementById("mensajeError").textContent = mensajeError;
         return false;
     }
 
-    limpiarMensaje();
-    mostrarConfirmacion("Formulario enviado correctamente ✅");
-    return true;
-}
-
-// Muestra un mensaje de error en pantalla
-function mostrarError(mensaje) {
-    document.getElementById("mensajeError").textContent = mensaje;
-}
-
-// Limpia el mensaje de error
-function limpiarMensaje() {
     document.getElementById("mensajeError").textContent = "";
-}
-
-// Muestra un mensaje de confirmación
-function mostrarConfirmacion(mensaje) {
-    alert(mensaje);
+    alert("Formulario enviado correctamente");
+    return true;
 }
 
 // -------------------------------
 // Componente dinámico: Buscador de sectores
 // -------------------------------
 
-// Arreglo de sectores disponibles
 const sectores = ["Comercio", "Servicios", "Tecnología", "Manufactura", "Agricultura", "Otro"];
 
-// Filtra los sectores según el texto ingresado
 function buscarSector() {
     const filtro = document.getElementById("buscadorSector").value.toLowerCase();
     const resultados = sectores.filter(sector => sector.toLowerCase().includes(filtro));
