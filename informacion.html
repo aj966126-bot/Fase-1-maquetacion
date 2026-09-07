@@ -14,6 +14,42 @@
     <title>Información | PymeGest</title>
 
     <link rel="stylesheet" href="css/style.css">
+    <style>
+    .tabla-contenedor {
+        overflow-x: auto;
+        margin-top: 30px;
+    }
+
+    .tabla-pymegest {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .tabla-pymegest caption {
+        margin-bottom: 15px;
+        font-weight: 700;
+        color: #004080;
+        font-size: 1.1rem;
+    }
+
+    .tabla-pymegest th,
+    .tabla-pymegest td {
+        padding: 14px;
+        border: 1px solid #e9edf1;
+        text-align: left;
+    }
+
+    .tabla-pymegest th {
+        background-color: #004080;
+        color: #ffffff;
+    }
+
+    .tabla-pymegest tbody tr:hover {
+        background-color: #eaf3fb;
+    }
+</style>
 
 </head>
 
@@ -29,7 +65,7 @@
 
             <div class="logo">
 
-                <a href="Inicio.html">
+                <a href="index.html">
 
                     <img src="img/logo-pymegest.jpeg"
                          alt="Logo de PymeGest">
@@ -46,7 +82,7 @@
 
                     <li>
 
-                        <a href="Inicio.html">
+                        <a href="index.html">
                             Inicio
                         </a>
 
@@ -54,7 +90,7 @@
 
                     <li>
 
-                        <a href="Informacion.html"
+                        <a href="informacion.html"
                            class="activo">
 
                             Información
@@ -65,7 +101,7 @@
 
                     <li>
 
-                        <a href="Formulario.html">
+                        <a href="formulario.html">
                             Formulario
                         </a>
 
@@ -222,7 +258,79 @@
 
         </section>
 
+        <!-- TABLA DE HERRAMIENTAS -->
+        <section class="seccion">
 
+            <div class="contenedor">
+
+                <div class="encabezado-seccion">
+
+                    <span class="etiqueta">
+                        Herramientas
+                    </span>
+
+                    <h2>
+                        Herramientas de PymeGest y su utilidad
+                    </h2>
+
+                    <p>
+                        Estas funcionalidades están orientadas a facilitar
+                        la organización y gestión de las pequeñas y medianas empresas.
+                    </p>
+
+                </div>
+
+                <div class="tabla-contenedor">
+
+                    <table class="tabla-pymegest">
+
+                        <caption style="text-align: center;">
+                            Resumen de funcionalidades principales
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Herramienta</th>
+                                <th scope="col">Función principal</th>
+                                <th scope="col">Beneficio</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Inventario</td>
+                                <td>Controlar productos, existencias y movimientos.</td>
+                                <td>Mayor control de los recursos.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Ventas</td>
+                                <td>Registrar y dar seguimiento a las operaciones comerciales.</td>
+                                <td>Mejor seguimiento de las ventas.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Clientes</td>
+                                <td>Organizar información y datos de contacto.</td>
+                                <td>Atención más organizada.</td>
+                            </tr>
+
+                            <tr>
+                                <td>Reportes</td>
+                                <td>Consultar información y resultados del negocio.</td>
+                                <td>Apoyo a la toma de decisiones.</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
 
         <!-- BENEFICIOS -->
 
@@ -338,7 +446,7 @@
                     accesible y orientada a las necesidades de las PYMES.
                 </p>
 
-                <a href="Formulario.html"
+                <a href="formulario.html"
                    class="boton boton-primario">
 
                     Conocer más
@@ -352,7 +460,6 @@
     </main>
 
 
-
     <!-- FOOTER -->
 
     <footer class="pie-pagina">
@@ -362,7 +469,7 @@
 
             <div class="footer-info">
 
-                <a href="Inicio.html"
+                <a href="index.html"
                    class="logo-footer">
 
                     <img src="img/logo-pymegest.jpeg"
@@ -388,19 +495,19 @@
                 <ul>
 
                     <li>
-                        <a href="Inicio.html">
+                        <a href="index.html">
                             Inicio
                         </a>
                     </li>
 
                     <li>
-                        <a href="Informacion.html">
+                        <a href="informacion.html">
                             Información
                         </a>
                     </li>
 
                     <li>
-                        <a href="Formulario.html">
+                        <a href="formulario.html">
                             Formulario
                         </a>
                     </li>
@@ -450,7 +557,7 @@
     </footer>
 
     <!-- ENLACE AL JAVASCRIPT -->
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
 </html>
