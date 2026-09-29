@@ -28,3 +28,26 @@ CREATE TABLE clientes (
     FOREIGN KEY (empresa_id) REFERENCES empresas(id)
 );
 
+-- Tabla de solicitudes recibidas desde el formulario web
+
+CREATE TABLE solicitudes (
+
+    id SERIAL PRIMARY KEY,
+
+    nombre VARCHAR(100) NOT NULL,
+
+    correo VARCHAR(100) NOT NULL,
+
+    telefono VARCHAR(20) NOT NULL,
+
+    empresa VARCHAR(120) NOT NULL,
+
+    sector VARCHAR(50) NOT NULL,
+
+    tamano VARCHAR(30) NOT NULL,
+
+    mensaje TEXT,
+
+    fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+
+);

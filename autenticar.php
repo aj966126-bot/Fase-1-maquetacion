@@ -1,49 +1,65 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 session_start();
 
-if (!file_exists('conexion.php')) {
-    die("Error: El archivo conexion.php no existe en la raíz del proyecto.");
+require_once __DIR__ . '/config/database.php';
+
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: login.php');
+    exit;
 }
 
-require_once 'conexion.php';
+$correo = trim($_POST['correo'] ?? '');
+$contrasena = $_POST['contrasena'] ?? '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $correo = trim($_POST['correo'] ?? $_POST['email'] ?? '');
+if ($correo === '' || $contrasena === '') {
+    header('Location: login.php?error=1');
+    exit;
+}
 
-    if (empty($correo)) {
+if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
+    header('Location: login.php?error=1');
+    exit;
+}
+
+try {
+    $pdo = getConnection();
+
+    $stmt = $pdo->prepare(
+        'SELECT id, nombre, correo, contrasena
+         FROM usuarios
+         WHERE correo = :correo
+         LIMIT 1'
+    );
+
+    $stmt->execute([
+        ':correo' => $correo
+    ]);
+
+    $usuario = $stmt->fetch();
+
+
+    if (
+        !$usuario ||
+        !password_verify($contrasena, $usuario['contrasena'])
+    ) {
         header('Location: login.php?error=1');
         exit;
     }
 
-    try {
-        if (!isset($conexion)) {
-            die("Error: La variable \$conexion no está definida en conexion.php.");
-        }
+    session_regenerate_id(true);
 
-        // Se usa 'email' como nombre de columna en la tabla usuarios
-        $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE email = :correo");
-        $stmt->execute([':correo' => $correo]);
-        $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+    $_SESSION['usuario_id'] = (int) $usuario['id'];
+    $_SESSION['usuario_nombre'] = $usuario['nombre'];
+    $_SESSION['usuario_correo'] = $usuario['correo'];
 
-        if ($usuario) {
-            $_SESSION['usuario_id'] = $usuario['id'] ?? $usuario['id_usuario'] ?? 1;
-            $_SESSION['usuario_nombre'] = $usuario['nombre'] ?? 'Usuario';
-            $_SESSION['usuario_correo'] = $usuario['email'] ?? $correo;
+    header('Location: panel.php');
+    exit;
 
-            header('Location: panel.php');
-            exit;
-        } else {
-            header('Location: login.php?error=1');
-            exit;
-        }
-    } catch (PDOException $e) {
-        die("Error en la base de datos: " . $e->getMessage());
-    }
-} else {
-    header('Location: login.php');
+} catch (Throwable $e) {
+    error_log('Error de autenticación: ' . $e->getMessage());
+
+    header('Location: login.php?error=1');
     exit;
 }

@@ -1,47 +1,15 @@
-// PymeGest - Fase 2
-// Interactividad del lado cliente con JavaScript
+// ============================================================
+// PymeGest - JavaScript principal
+// Interactividad, validaciones y componentes dinámicos
+// ============================================================
 
+
+// ------------------------------------------------------------
 // Datos generales del proyecto
+// ------------------------------------------------------------
+
 const NOMBRE_PLATAFORMA = "PymeGest";
-const DESCRIPCION_CORTA =
-    "Plataforma web para la gestión de pequeñas y medianas empresas";
 const VERSION = "1.0.0";
-const ANIO_CREACION = 2026;
-const TIENE_PANEL_GRAFICO = true;
-
-// Variables del proyecto
-let empresaActiva = "Mi Empresa";
-let totalEmpleados = 12;
-let planPremium = false;
-let socioFundador = null;
-let inversionInicial;
-
-// Tipos de datos utilizados
-let tipoCadena = NOMBRE_PLATAFORMA;
-let tipoNumero = 25000;
-let tipoBooleano = TIENE_PANEL_GRAFICO;
-let tipoNulo = null;
-let tipoIndefinido;
-
-let empresaDemo = {
-    nombre: "Ferretería El Constructor",
-    sector: "Comercio",
-    empleados: 8,
-    activa: true,
-    contacto: {
-        correo: "contacto@elconstructor.com",
-        telefono: "(809) 555-0000"
-    }
-};
-
-let idUnico = Symbol("pymegest");
-
-// Datos utilizados por PymeGest
-const tiposEmpresa = [
-    "Microempresa",
-    "Pequeña empresa",
-    "Mediana empresa"
-];
 
 const sectoresEmpresariales = [
     "Comercio",
@@ -85,28 +53,11 @@ const funcionalidadesPymeGest = [
     }
 ];
 
-const empresasRegistradas = [
-    {
-        nombre: "Ferretería El Constructor",
-        sector: "Comercio",
-        empleados: 8,
-        plan: "Gratis"
-    },
-    {
-        nombre: "Estudio Jurídico Valdez",
-        sector: "Servicios",
-        empleados: 15,
-        plan: "Profesional"
-    },
-    {
-        nombre: "TechSoluciones DR",
-        sector: "Tecnología",
-        empleados: 22,
-        plan: "Profesional"
-    }
-];
 
+// ------------------------------------------------------------
 // Funciones reutilizables
+// ------------------------------------------------------------
+
 function estaVacio(valor) {
     return valor.trim() === "";
 }
@@ -117,7 +68,9 @@ function validarCorreo(correo) {
 }
 
 function validarTelefono(telefono) {
-    const patronTelefono = /^\((809|829|849)\)\s\d{3}-\d{4}$/;
+    const patronTelefono =
+        /^\((809|829|849)\)\s\d{3}-\d{4}$/;
+
     return patronTelefono.test(telefono);
 }
 
@@ -138,22 +91,16 @@ function filtrarFuncionalidades(filtro, funcionalidades) {
     );
 }
 
-function contarElementos(lista) {
-    return lista.length;
-}
 
-function listarEmpresas(lista) {
-    return lista
-        .map(empresa => empresa.nombre)
-        .join(", ");
-}
+// ------------------------------------------------------------
+// Mensajes generales
+// ------------------------------------------------------------
 
-// Mensajes del formulario
 function obtenerContenedorMensaje() {
     return document.getElementById("mensajeError");
 }
 
-function mostrarError(mensaje) {
+function mostrarMensaje(mensaje, tipo) {
     const contenedor = obtenerContenedorMensaje();
 
     if (!contenedor) {
@@ -161,20 +108,8 @@ function mostrarError(mensaje) {
     }
 
     contenedor.textContent = mensaje;
-    contenedor.classList.add("error");
-    contenedor.classList.remove("exito");
-}
-
-function mostrarConfirmacion(mensaje) {
-    const contenedor = obtenerContenedorMensaje();
-
-    if (!contenedor) {
-        return;
-    }
-
-    contenedor.textContent = mensaje;
-    contenedor.classList.add("exito");
-    contenedor.classList.remove("error");
+    contenedor.classList.remove("error", "exito");
+    contenedor.classList.add(tipo);
 }
 
 function limpiarMensaje() {
@@ -188,57 +123,167 @@ function limpiarMensaje() {
     contenedor.classList.remove("error", "exito");
 }
 
-// Validación del formulario
-function validarFormulario() {
-    limpiarMensaje();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const correo = document.getElementById("correo").value.trim();
-    const telefono = document.getElementById("telefono").value.trim();
-    const empresa = document.getElementById("empresa").value.trim();
-    const sector = document.getElementById("sector").value;
-    const tamano = document.getElementById("tamano").value;
+// ------------------------------------------------------------
+// Validación individual de campos
+// ------------------------------------------------------------
 
-    if (
-        estaVacio(nombre) ||
-        estaVacio(correo) ||
-        estaVacio(telefono) ||
-        estaVacio(empresa) ||
-        sector === "" ||
-        tamano === ""
-    ) {
-        mostrarError(
-            "Por favor, completa todos los campos obligatorios."
-        );
-        return false;
+function mostrarErrorCampo(campo, mensaje) {
+    campo.classList.add("campo-invalido");
+    campo.setAttribute("aria-invalid", "true");
+
+    const contenedorError =
+        document.getElementById(`error-${campo.id}`);
+
+    if (contenedorError) {
+        contenedorError.textContent = mensaje;
     }
-
-    if (!validarCorreo(correo)) {
-        mostrarError(
-            "Por favor, introduce un correo electrónico válido."
-        );
-        return false;
-    }
-
-    if (!validarTelefono(telefono)) {
-        mostrarError(
-            "El teléfono debe tener el formato (809) 000-0000, " +
-            "(829) 000-0000 o (849) 000-0000."
-        );
-        return false;
-    }
-
-    mostrarConfirmacion(
-        "Formulario validado correctamente. " +
-        "Gracias por completar la información."
-    );
-
-    return false;
 }
 
+function limpiarErrorCampo(campo) {
+    campo.classList.remove("campo-invalido");
+    campo.removeAttribute("aria-invalid");
+
+    const contenedorError =
+        document.getElementById(`error-${campo.id}`);
+
+    if (contenedorError) {
+        contenedorError.textContent = "";
+    }
+}
+
+function validarCampo(campo) {
+    if (!campo) {
+        return true;
+    }
+
+    limpiarErrorCampo(campo);
+
+    const valor = campo.value.trim();
+
+    switch (campo.id) {
+        case "nombre":
+            if (estaVacio(valor)) {
+                mostrarErrorCampo(
+                    campo,
+                    "Escribe tu nombre completo."
+                );
+                return false;
+            }
+            break;
+
+        case "correo":
+            if (!validarCorreo(valor)) {
+                mostrarErrorCampo(
+                    campo,
+                    "Introduce un correo electrónico válido."
+                );
+                return false;
+            }
+            break;
+
+        case "telefono":
+            if (!validarTelefono(valor)) {
+                mostrarErrorCampo(
+                    campo,
+                    "Formato: (809) 000-0000, (829) 000-0000 o (849) 000-0000."
+                );
+                return false;
+            }
+            break;
+
+        case "empresa":
+            if (estaVacio(valor)) {
+                mostrarErrorCampo(
+                    campo,
+                    "Escribe el nombre de tu empresa."
+                );
+                return false;
+            }
+            break;
+
+        case "sector":
+            if (valor === "") {
+                mostrarErrorCampo(
+                    campo,
+                    "Selecciona el sector de la empresa."
+                );
+                return false;
+            }
+            break;
+
+        case "tamano":
+            if (valor === "") {
+                mostrarErrorCampo(
+                    campo,
+                    "Selecciona el tamaño de la empresa."
+                );
+                return false;
+            }
+            break;
+    }
+
+    return true;
+}
+
+
+// ------------------------------------------------------------
+// Validación completa del formulario
+// ------------------------------------------------------------
+
+function validarFormulario(evento) {
+    const formulario =
+        document.getElementById("formularioPymeGest");
+
+    if (!formulario) {
+        return;
+    }
+
+    limpiarMensaje();
+
+    const campos = [
+        document.getElementById("nombre"),
+        document.getElementById("correo"),
+        document.getElementById("telefono"),
+        document.getElementById("empresa"),
+        document.getElementById("sector"),
+        document.getElementById("tamano")
+    ];
+
+    let formularioValido = true;
+
+    campos.forEach(campo => {
+        if (!validarCampo(campo)) {
+            formularioValido = false;
+        }
+    });
+
+    if (!formularioValido) {
+        evento.preventDefault();
+
+        mostrarMensaje(
+            "Revisa los campos marcados antes de enviar el formulario.",
+            "error"
+        );
+
+        const primerCampoInvalido =
+            formulario.querySelector(".campo-invalido");
+
+        if (primerCampoInvalido) {
+            primerCampoInvalido.focus();
+        }
+    }
+}
+
+
+// ------------------------------------------------------------
 // Buscador dinámico de sectores
+// ------------------------------------------------------------
+
 function buscarSector() {
-    const buscador = document.getElementById("buscadorSector");
+    const buscador =
+        document.getElementById("buscadorSector");
+
     const listaResultados =
         document.getElementById("resultadosSector");
 
@@ -247,48 +292,71 @@ function buscarSector() {
     }
 
     const filtro = buscador.value.trim();
+
     listaResultados.innerHTML = "";
 
     if (estaVacio(filtro)) {
         return;
     }
 
-    const resultados = filtrarSectores(
-        filtro,
-        sectoresEmpresariales
-    );
+    const resultados =
+        filtrarSectores(
+            filtro,
+            sectoresEmpresariales
+        );
 
     if (resultados.length === 0) {
-        const elemento = document.createElement("li");
+        const elemento =
+            document.createElement("li");
+
         elemento.textContent =
             "No se encontraron resultados.";
 
         listaResultados.appendChild(elemento);
+
         return;
     }
 
     resultados.forEach(sector => {
-        const elemento = document.createElement("li");
+        const elemento =
+            document.createElement("li");
+
         elemento.textContent = sector;
+
         listaResultados.appendChild(elemento);
     });
 }
 
+
+// ------------------------------------------------------------
 // Buscador dinámico de funcionalidades
+// ------------------------------------------------------------
+
 function crearTarjetaFuncionalidad(funcionalidad, indice) {
-    const tarjeta = document.createElement("article");
+    const tarjeta =
+        document.createElement("article");
+
     tarjeta.classList.add("tarjeta");
 
-    const icono = document.createElement("div");
+    const icono =
+        document.createElement("div");
+
     icono.classList.add("icono");
+
     icono.textContent =
         String(indice + 1).padStart(2, "0");
 
-    const titulo = document.createElement("h3");
-    titulo.textContent = funcionalidad.nombre;
+    const titulo =
+        document.createElement("h3");
 
-    const descripcion = document.createElement("p");
-    descripcion.textContent = funcionalidad.descripcion;
+    titulo.textContent =
+        funcionalidad.nombre;
+
+    const descripcion =
+        document.createElement("p");
+
+    descripcion.textContent =
+        funcionalidad.descripcion;
 
     tarjeta.appendChild(icono);
     tarjeta.appendChild(titulo);
@@ -317,36 +385,125 @@ function renderizarFuncionalidades(funcionalidades) {
 
     mensaje.hidden = true;
 
-    funcionalidades.forEach((funcionalidad, indice) => {
-        const tarjeta = crearTarjetaFuncionalidad(
-            funcionalidad,
-            indice
-        );
+    funcionalidades.forEach(
+        (funcionalidad, indice) => {
+            const tarjeta =
+                crearTarjetaFuncionalidad(
+                    funcionalidad,
+                    indice
+                );
 
-        contenedor.appendChild(tarjeta);
-    });
+            contenedor.appendChild(tarjeta);
+        }
+    );
 }
 
 function buscarFuncionalidad() {
     const buscador =
-        document.getElementById("buscadorFuncionalidad");
+        document.getElementById(
+            "buscadorFuncionalidad"
+        );
 
     if (!buscador) {
         return;
     }
 
-    const resultados = filtrarFuncionalidades(
-        buscador.value.trim(),
-        funcionalidadesPymeGest
-    );
+    const resultados =
+        filtrarFuncionalidades(
+            buscador.value.trim(),
+            funcionalidadesPymeGest
+        );
 
     renderizarFuncionalidades(resultados);
 }
 
-// Inicialización
+
+// ------------------------------------------------------------
+// Inicialización de PymeGest
+// ------------------------------------------------------------
+
 function inicializarPymeGest() {
+    const formulario =
+        document.getElementById(
+            "formularioPymeGest"
+        );
+
+    if (formulario) {
+        formulario.addEventListener(
+            "submit",
+            validarFormulario
+        );
+
+        const camposFormulario =
+            formulario.querySelectorAll(
+                "input[required], select[required]"
+            );
+
+        camposFormulario.forEach(campo => {
+            campo.addEventListener(
+                "blur",
+                () => validarCampo(campo)
+            );
+
+            campo.addEventListener(
+                "input",
+                () => {
+                    if (
+                        campo.classList.contains(
+                            "campo-invalido"
+                        )
+                    ) {
+                        validarCampo(campo);
+                    }
+                }
+            );
+
+            campo.addEventListener(
+                "change",
+                () => {
+                    if (
+                        campo.classList.contains(
+                            "campo-invalido"
+                        )
+                    ) {
+                        validarCampo(campo);
+                    }
+                }
+            );
+        });
+
+        formulario.addEventListener(
+            "reset",
+            () => {
+                window.setTimeout(() => {
+                    limpiarMensaje();
+
+                    camposFormulario.forEach(
+                        limpiarErrorCampo
+                    );
+                }, 0);
+            }
+        );
+    }
+
+
+    const buscadorSector =
+        document.getElementById(
+            "buscadorSector"
+        );
+
+    if (buscadorSector) {
+        buscadorSector.addEventListener(
+            "input",
+            buscarSector
+        );
+    }
+
+
     const buscadorFuncionalidad =
-        document.getElementById("buscadorFuncionalidad");
+        document.getElementById(
+            "buscadorFuncionalidad"
+        );
 
     if (buscadorFuncionalidad) {
         renderizarFuncionalidades(
@@ -359,20 +516,12 @@ function inicializarPymeGest() {
         );
     }
 
+
     console.log(
         `${NOMBRE_PLATAFORMA} v${VERSION} cargado correctamente.`
     );
-
-    console.log(
-        "Funcionalidades disponibles:",
-        contarElementos(funcionalidadesPymeGest)
-    );
-
-    console.log(
-        "Empresas registradas:",
-        listarEmpresas(empresasRegistradas)
-    );
 }
+
 
 document.addEventListener(
     "DOMContentLoaded",

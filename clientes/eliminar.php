@@ -1,15 +1,27 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header('Location: ../login.php');
+    exit;
+}
+
 require_once __DIR__ . '/../config/database.php';
 
-$id = $_GET['id'] ?? '';
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Location: index.php');
+    exit;
+}
+
+$id = $_POST['id'] ?? '';
 
 if ($id === '' || !ctype_digit((string) $id)) {
-    die('Cliente no válido.');
+    header('Location: index.php');
+    exit;
 }
 
 try {
-
     $pdo = getConnection();
 
     $stmt = $pdo->prepare(
@@ -22,10 +34,8 @@ try {
 
     header('Location: index.php?eliminado=1');
     exit;
-
 } catch (Throwable $e) {
-
     error_log('Error al eliminar cliente: ' . $e->getMessage());
-
-    die('No se pudo eliminar el cliente.');
+    header('Location: index.php?error=eliminar');
+    exit;
 }
