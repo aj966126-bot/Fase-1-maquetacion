@@ -2,7 +2,8 @@
 CREATE TABLE usuarios (
     id SERIAL PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    contrasena VARCHAR(200) NOT NULL, -- campo para hash de contraseña
     telefono VARCHAR(20) NOT NULL,
     direccion VARCHAR(150) NOT NULL
 );
