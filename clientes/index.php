@@ -64,6 +64,7 @@ try {
             <th>Correo</th>
             <th>Teléfono</th>
             <th>Empresa</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -74,6 +75,22 @@ try {
               <td><?php echo htmlspecialchars($cliente['correo']); ?></td>
               <td><?php echo htmlspecialchars($cliente['telefono']); ?></td>
               <td><?php echo htmlspecialchars($cliente['empresa']); ?></td>
+              <td>
+                <a
+                    href="editar.php?id=<?php echo (int) $cliente['id']; ?>"
+                    class="btn btn-primary"
+                >
+                    Editar
+                </a>
+
+                <a
+                    href="eliminar.php?id=<?php echo (int) $cliente['id']; ?>"
+                    class="btn btn-outline"
+                    onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');"
+                >
+                    Eliminar
+                </a>
+            </td>
             </tr>
           <?php endforeach; ?>
         </tbody>
