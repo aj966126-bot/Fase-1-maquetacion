@@ -42,3 +42,68 @@ CREATE TABLE solicitudes (
     fecha_registro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+
+-- =========================================
+-- DATOS DE PRUEBA - PYMEGEST
+-- =========================================
+
+-- Usuario de demostracion
+-- Contrasena de prueba: Demo2026!
+-- Guardada como hash bcrypt, no en texto plano.
+INSERT INTO usuarios
+(nombre, correo, contrasena, telefono, direccion)
+VALUES
+(
+    'Administrador PymeGest',
+    'demo@pymegest.test',
+    '$2y$12$9AcnhHveiyc3XOppTXkTdu9i7wk6mIcCldbyUC/D4uvTVk7ubsNh2',
+    '8095550101',
+    'Santiago, Republica Dominicana'
+);
+
+
+-- Empresa de prueba
+INSERT INTO empresas (nombre, direccion, telefono, usuario_id)
+SELECT
+    'Comercial PymeGest Demo',
+    'Santiago, Republica Dominicana',
+    '8095550102',
+    id
+FROM usuarios
+WHERE correo = 'demo@pymegest.test';
+
+-- Clientes de prueba
+INSERT INTO clientes (nombre, correo, telefono, empresa_id)
+SELECT datos.nombre, datos.correo, datos.telefono, e.id
+FROM (
+    VALUES
+        ('Ana Martinez', 'ana@example.com', '8095550103'),
+        ('Carlos Rodriguez', 'carlos@example.com', '8095550104'),
+        ('Maria Perez', 'maria@example.com', '8095550105')
+) AS datos(nombre, correo, telefono)
+CROSS JOIN empresas e
+WHERE e.nombre = 'Comercial PymeGest Demo';
+
+-- Solicitudes de prueba
+INSERT INTO solicitudes
+(nombre, correo, telefono, empresa, sector, tamano, mensaje)
+VALUES
+(
+    'Ana Martinez',
+    'ana@example.com',
+    '8095550103',
+    'Comercial PymeGest Demo',
+    'comercio',
+    'micro',
+    'Necesito informacion sobre el sistema.'
+),
+(
+    'Carlos Rodriguez',
+    'carlos@example.com',
+    '8095550104',
+    'Servicios Empresariales Demo',
+    'servicios',
+    'pequena',
+    'Me interesa conocer las funciones de PymeGest.'
+);
+
